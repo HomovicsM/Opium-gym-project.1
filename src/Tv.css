@@ -1,0 +1,52 @@
+.tv-container, .tv-container-merch {
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .tv-container {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tv-container-merch {
+    bottom: 5%;
+    right: 38%;
+    transform: translateX(50%);
+  }
+  
+  .tv, .tv-merch {
+    background-color: transparent;
+    width: 300px;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: transparent;
+    position: relative;
+  }
+  
+  .tour-link, .merch-link {
+    color: transparent;
+    font-size: 130px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .tour-link:hover, .merch-link:hover {
+    text-decoration: underline;
+  }
+  .tv, .tv-tour {
+    background-color:transparent;
+    width: 300px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: transparent;
+    position: relative;
+  }
+  

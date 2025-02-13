@@ -1,0 +1,56 @@
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: #953232;
+    text-decoration: none;
+    font-size: 16px;
+    
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 50;
+    margin-left: 10px;
+  }
+  
+  .bar {
+    width: 24px;
+    height: 4px;
+    background-color: #953232;
+    border-radius: 2px;
+    margin: 2px 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .rotate-45 {
+    transform: rotate(45deg);
+  }
+  
+  .-rotate-45 {
+    transform: rotate(-45deg);
+  }
+  
+  .hidden {
+    opacity: 0;
+  }

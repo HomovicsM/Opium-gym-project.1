@@ -1,0 +1,75 @@
+.merch-container {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  /* Háttérvideó */
+  .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Háttérben tartja a videót */
+    overflow: hidden;
+  }
+  
+  .video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* A videó teljesen lefedi a képernyőt */
+  }
+  
+  /* Kártyák és tartalom stílus */
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    position: relative;
+    z-index: 1; /* A tartalom a videó felett marad */
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 220px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .card-img {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    object-fit: contain;
+  }
+  
+  .order-btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .order-btn:hover {
+    background: #cc5200;
+  }
+  
