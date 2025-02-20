@@ -4,15 +4,14 @@ import './App.css';
 import Navbar from './Navbar';
 import Tv from './Tv';
 import Merch from './Merch';
+import Tour from './Tour';
 
 function App() {
   return (
     <Router>
       <div className="app">
-        {/* A Navbar MINDEN oldalon megjelenik */}
         <Navbar />
 
-        {/* A videó háttér csak a főoldalon jelenjen meg */}
         <Routes>
           <Route
             path="/"
@@ -29,6 +28,7 @@ function App() {
             }
           />
           <Route path="/merch" element={<Merch />} />
+          <Route path="/tour" element={<Tour />} /> {/* Tour oldal hozzáadása */}
         </Routes>
       </div>
     </Router>
