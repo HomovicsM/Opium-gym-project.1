@@ -49,4 +49,32 @@
     box-shadow: transparent;
     position: relative;
   }
-  
+  .tv-container-videos {
+    position: absolute;
+    bottom: 18%; /* VIDEOS gomb helyzete */
+    right: 60.5%;
+    transform: translateX(50%);
+}
+
+.tv-videos {
+    background-color: transparent;
+    width: 300px;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: transparent;
+    position: relative;
+}
+
+.video-link {
+    color: transparent;
+    font-size: 130px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.video-link:hover {
+    text-decoration: underline;
+}

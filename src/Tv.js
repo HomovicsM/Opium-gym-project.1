@@ -32,6 +32,20 @@ function Tv() {
           </a>
         </div>
       </div>
+
+      {/* Új VIDEOS link */}
+      <div className="tv-container-videos">
+        <div className="tv-videos">
+          <a
+            href="https://www.example.com/videos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="video-link"
+          >
+            CLCK3
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

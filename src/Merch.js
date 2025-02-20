@@ -8,17 +8,24 @@ const products = [
 ];
 
 function Merch() {
-  // Amikor a Merch oldal betöltődik, fekete hátteret állítunk be
   useEffect(() => {
     document.body.classList.add("merch-active");
 
     return () => {
-      document.body.classList.remove("merch-active"); // Ha elhagyjuk az oldalt, visszaállítjuk
+      document.body.classList.remove("merch-active");
     };
   }, []);
 
   return (
     <div className="merch-container">
+      {/* Merch háttérvideó */}
+      <div className="merch-video-container">
+        <video className="merch-video-background" autoPlay loop muted playsInline>
+          <source src="/merchhatter.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <h2>Merch Shop</h2>
       <div className="merch-grid">
         {products.map((product) => (
