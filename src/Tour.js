@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./Tour.css";
 
 const images = [
-  "/gym.jpg",
-  "/gym2.jpg",
-  "/gym3.jpg",
-  "/gym4.jpg",
+    "/gymkep7.jpg",
+    "/gymkep6,jpg.webp",
+  "/gymkep1.jpg",
+  "/gymkep2.jpg",
+  "/gymkep3.jpg",
+  "/gymkep4.jpg",
+  "/gymkep5.jpg",
+
 
 ];
 

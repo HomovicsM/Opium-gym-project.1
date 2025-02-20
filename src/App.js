@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import Tv from './Tv';
 import Merch from './Merch';
 import Tour from './Tour';
+import Videos from './Videos';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           />
           <Route path="/merch" element={<Merch />} />
           <Route path="/tour" element={<Tour />} /> {/* Tour oldal hozzáadása */}
+          <Route path="/videos" element={<Videos />} /> {/* Új Videos oldal */}
         </Routes>
       </div>
     </Router>

@@ -13,6 +13,10 @@ function Navbar() {
     const handleTourClick = () => {
         navigate('/tour'); 
     };
+    
+    const handleVideosClick = () => {
+        navigate('/videos');
+    };
 
     return (
         <nav className="navbar">
@@ -25,7 +29,7 @@ function Navbar() {
                 <a href="#" onClick={handleHomeClick}>Főoldal</a>
                 <a href="/merch">Merch</a>
                 <a href="/tour" onClick={handleTourClick}>Tour</a>
-                <a href="#contact">Videos</a>
+                <a href="/videos" onClick={handleVideosClick}>Videos</a>
                 <a href="#contact">Rólunk</a>
                 <a href="#contact">Belépés</a>
             </div>

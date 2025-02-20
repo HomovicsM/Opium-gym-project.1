@@ -15,6 +15,11 @@ function Tv() {
     navigate('/merch');
   };
 
+  const handleVideosClick = (e) => {
+    e.preventDefault();
+    navigate('/videos');
+  };
+
   return (
     <div>
       <div className="tv-container">
@@ -29,6 +34,14 @@ function Tv() {
         <div className="tv-merch">
           <a href="/merch" onClick={handleMerchClick} className="merch-link">
             CLCK2
+          </a>
+        </div>
+      </div>
+      
+      <div className="tv-container-videos">
+        <div className="tv-videos">
+          <a href="/videos" onClick={handleVideosClick} className="video-link">
+            CLCK3
           </a>
         </div>
       </div>

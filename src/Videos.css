@@ -1,0 +1,51 @@
+.videos-container {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Háttérvideó */
+.videos-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.videos-video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Link kép */
+.video-link-container {
+    margin-top: 20px;
+}
+
+.video-thumbnail {
+    width: 300px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover {
+    transform: scale(1.1);
+}
+
+/* Videós oldalhoz egyedi háttér */
+body.videos-active {
+    background-color: black !important;
+    overflow-y: auto !important;
+}
