@@ -29,6 +29,15 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    {
+      "AuthSettings": {
+        "JwtOptions": {
+          "Secret": "your-very-secret-key",
+          "Issuer": "your-issuer",
+          "Audience": "your-audience"
+        }
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
