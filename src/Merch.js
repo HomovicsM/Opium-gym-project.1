@@ -1,24 +1,93 @@
-import React, { useEffect } from "react";
+// Merch.js
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./Merch.css";
 
-const products = [
-  { id: 1, name: "Opium polo", price: "15990 Ft", image: "https://m.media-amazon.com/images/I/61HiOI2kVmL.jpg" },
-  { id: 2, name: "00 logo polo", price: "12990 Ft", image: "https://i.etsystatic.com/45965460/r/il/4c9f57/5567250153/il_570xN.5567250153_9h03.jpg" },
-  { id: 3, name: "Sapka", price: "4990 Ft", image: "/images/sapka.jpg" },
-];
+function MerchList({ merchItems, onDelete }) {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <div className="merch-grid">
+        {merchItems.map((item) => (
+          <div key={item.id} className="card">
+            <img src={item.image} alt={item.name} className="card-img" />
+            <h3>{item.name}</h3>
+            <button className="order-btn" onClick={() => onDelete(item.id)}>
+              Törlés
+            </button>
+          </div>
+        ))}
+      </div>
+      <button className="order-btn" onClick={() => navigate('/merch/new')}>
+        Új termék hozzáadása
+      </button>
+    </div>
+  );
+}
+
+function MerchForm({ onSubmit }) {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ name, image });
+    navigate('/merch');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+      <h2>Új termék hozzáadása</h2>
+      <div>
+        <input
+          type="text"
+          placeholder="Termék neve"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Kép URL"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit" className="order-btn">
+        Mentés
+      </button>
+    </form>
+  );
+}
 
 function Merch() {
-  useEffect(() => {
-    document.body.classList.add("merch-active");
+  const [merchItems, setMerchItems] = useState([]);
 
-    return () => {
-      document.body.classList.remove("merch-active");
-    };
+  useEffect(() => {
+    const initialData = [
+      { id: 1, name: "T-Shirt", image: "/tshirt.jpg" },
+      { id: 2, name: "Cap", image: "/cap.jpg" },
+      // Egyéb elemek...
+    ];
+    setMerchItems(initialData);
   }, []);
+
+  const handleDelete = (id) => {
+    setMerchItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const handleAdd = (item) => {
+    const newItem = { id: Date.now(), ...item };
+    setMerchItems((prevItems) => [...prevItems, newItem]);
+  };
 
   return (
     <div className="merch-container">
-      {/* Merch háttérvideó */}
+      {/* Háttér videó hozzáadása */}
       <div className="merch-video-container">
         <video className="merch-video-background" autoPlay loop muted playsInline>
           <source src="/merchhatter.mp4" type="video/mp4" />
@@ -26,17 +95,13 @@ function Merch() {
         </video>
       </div>
 
-      <h2>Merch Shop</h2>
-      <div className="merch-grid">
-        {products.map((product) => (
-          <div key={product.id} className="card">
-            <img src={product.image} alt={product.name} className="card-img" />
-            <h3>{product.name}</h3>
-            <p>{product.price}</p>
-            <button className="order-btn">Rendelés</button>
-          </div>
-        ))}
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={<MerchList merchItems={merchItems} onDelete={handleDelete} />}
+        />
+        <Route path="/new" element={<MerchForm onSubmit={handleAdd} />} />
+      </Routes>
     </div>
   );
 }

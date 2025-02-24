@@ -30,6 +30,7 @@ function App() {
             }
           />
           <Route path="/merch" element={<Merch />} />
+          <Route path="/merch/*" element={<Merch />} />
           <Route path="/tour" element={<Tour />} /> {/* Tour oldal hozzáadása */}
           <Route path="/videos" element={<Videos />} /> {/* Új Videos oldal */}
         </Routes>
