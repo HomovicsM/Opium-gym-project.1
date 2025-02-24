@@ -1,11 +1,12 @@
 ﻿using gymproject1.Models;
+using gymproject1.Models;
 
 namespace gymproject1.Repositories
 {
     public interface IUserRepository
     {
-        User? GetByEmail(string email);
-        void Add(User user);
-        IEnumerable<User> GetAll();
+        Task<User?> GetByEmailAsync(string email);
+        Task AddAsync(User user);
+        Task<IEnumerable<User>> GetAllAsync();
     }
 }

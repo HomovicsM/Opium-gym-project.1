@@ -27,7 +27,7 @@ namespace gymproject1.Controllers
 
         // POST api/auth/register
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Username) ||
                 string.IsNullOrWhiteSpace(request.Email) ||
@@ -36,7 +36,8 @@ namespace gymproject1.Controllers
                 return BadRequest(new { message = "Minden mező kitöltése kötelező!" });
             }
 
-            if (_userRepository.GetByEmail(request.Email) != null)
+            var existingUser = await _userRepository.GetByEmailAsync(request.Email);
+            if (existingUser != null)
             {
                 return BadRequest(new { message = "Ezzel az email címmel már regisztráltak!" });
             }
@@ -50,14 +51,14 @@ namespace gymproject1.Controllers
             // Jelszó hashelése
             user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
 
-            _userRepository.Add(user);
+            await _userRepository.AddAsync(user);
 
             return StatusCode(201, new { message = "Sikeres regisztráció!" });
         }
 
         // POST api/auth/login
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Email) ||
                 string.IsNullOrWhiteSpace(request.Password))
@@ -65,7 +66,7 @@ namespace gymproject1.Controllers
                 return BadRequest(new { message = "Minden mező kitöltése kötelező!" });
             }
 
-            var user = _userRepository.GetByEmail(request.Email);
+            var user = await _userRepository.GetByEmailAsync(request.Email);
             if (user == null)
             {
                 return BadRequest(new { message = "Érvénytelen email vagy jelszó!" });
