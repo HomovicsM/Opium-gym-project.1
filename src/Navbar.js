@@ -1,46 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './navbar.css';
 
 function Navbar() {
-    // Alapból látható legyen a navigáció
-    const [menuOpen, setMenuOpen] = useState(true);
-    const navigate = useNavigate(); 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-    const handleHomeClick = () => {
-        navigate('/'); 
-    };
+  const handleNavigation = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
 
-    const handleTourClick = () => {
-        navigate('/tour'); 
-    };
-    
-    const handleVideosClick = () => {
-        navigate('/videos');
-    };
-
-    return (
-        <nav className="navbar">
-            <div 
-              className="menu-button" 
-              aria-label="button" 
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-                <div className={`bar ${menuOpen ? 'rotate-45' : ''}`}></div>
-                <div className={`bar ${menuOpen ? 'hidden' : ''}`}></div>
-                <div className={`bar ${menuOpen ? '-rotate-45' : ''}`}></div>
-            </div>
-            {/* Ha a menü le van zárva (menuOpen false), a "hidden" osztály elrejti a linkeket */}
-            <div className={`nav-links ${!menuOpen ? 'hidden' : ''}`}>
-                <a href="#" onClick={handleHomeClick}>Főoldal</a>
-                <a href="/merch">Merch</a>
-                <a href="/tour" onClick={handleTourClick}>Tour</a>
-                <a href="/videos" onClick={handleVideosClick}>Videos</a>
-                <a href="#contact">Rólunk</a>
-                <a href="#contact">Belépés</a>
-            </div>
-        </nav>
-    );
+  return (
+    <nav className="navbar">
+      <div className="menu-button" aria-label="button" onClick={() => setMenuOpen(!menuOpen)}>
+        <div className={`bar ${menuOpen ? 'rotate-45' : ''}`}></div>
+        <div className={`bar ${menuOpen ? 'hidden' : ''}`}></div>
+        <div className={`bar ${menuOpen ? '-rotate-45' : ''}`}></div>
+      </div>
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <a href="#" onClick={() => handleNavigation('/')}>Főoldal</a>
+        <a href="/merch" onClick={() => handleNavigation('/merch')}>Merch</a>
+        <a href="/tour" onClick={() => handleNavigation('/tour')}>Tour</a>
+        <a href="/videos" onClick={() => handleNavigation('/videos')}>Videos</a>
+        <a href="#contact">Rólunk</a>
+        <a href="/login" onClick={() => handleNavigation('/login')}>Bejelentkezés</a>
+        <a href="/register" onClick={() => handleNavigation('/register')}>Regisztráció</a>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

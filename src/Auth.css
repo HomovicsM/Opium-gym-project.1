@@ -1,0 +1,65 @@
+/* Az egész oldalra kiterjedő konténer a videóhoz */
+.auth-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Videó háttér stílusok */
+  .auth-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  .auth-video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Az űrlapot tartalmazó doboz stílusa - megnövelt méret */
+  .auth-container {
+    width: 500px; /* Növelt szélesség */
+    margin: 80px auto; /* Kicsit kisebb margó a nagyobb panel miatt */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px; /* Nagyobb belső margó */
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem; /* Kicsit nagyobb betűméret az űrlapban */
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-form input {
+    padding: 12px; /* Növelt input padding */
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .auth-form button {
+    padding: 12px;
+    background-color: #953232;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  .auth-form button:hover {
+    background-color: #cc5200;
+  }
+  
