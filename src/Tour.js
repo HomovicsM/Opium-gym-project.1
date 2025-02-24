@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Tour.css";
-
 const images = [
     "/gymkep7.jpg",
     "/gymkep6,jpg.webp",
