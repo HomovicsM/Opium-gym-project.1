@@ -1,93 +1,66 @@
-// Merch.js
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./Merch.css";
 
-function MerchList({ merchItems, onDelete }) {
-  const navigate = useNavigate();
+const API_BASE = "http://localhost:5000/api"; // Backend URL
+
+function MerchList({ merchItems, addToCart }) {
   return (
-    <div>
-      <div className="merch-grid">
-        {merchItems.map((item) => (
-          <div key={item.id} className="card">
-            <img src={item.image} alt={item.name} className="card-img" />
-            <h3>{item.name}</h3>
-            <button className="order-btn" onClick={() => onDelete(item.id)}>
-              Törlés
-            </button>
-          </div>
-        ))}
-      </div>
-      <button className="order-btn" onClick={() => navigate('/merch/new')}>
-        Új termék hozzáadása
-      </button>
+    <div className="merch-grid">
+      {merchItems.map((item) => (
+        <div key={item.id} className="card">
+          <img src={item.image} alt={item.name} className="card-img" />
+          <h3>{item.name}</h3>
+          <p className="price">{item.price} Ft</p>
+          <select className="size-select">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+          <button className="order-btn" onClick={() => addToCart(item)}>Kosárba</button>
+        </div>
+      ))}
     </div>
-  );
-}
-
-function MerchForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ name, image });
-    navigate('/merch');
-  };
-
-  return (
-    <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-      <h2>Új termék hozzáadása</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Termék neve"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Kép URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit" className="order-btn">
-        Mentés
-      </button>
-    </form>
   );
 }
 
 function Merch() {
   const [merchItems, setMerchItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
+  const navigate = useNavigate();
 
+  // **Termékek betöltése a backendből**
   useEffect(() => {
-    const initialData = [
-      { id: 1, name: "T-Shirt", image: "/tshirt.jpg" },
-      { id: 2, name: "Cap", image: "/cap.jpg" },
-      // Egyéb elemek...
-    ];
-    setMerchItems(initialData);
+    fetch(`${API_BASE}/product`)
+      .then(response => response.json())
+      .then(data => setMerchItems(data))
+      .catch(error => console.error("Hiba a termékek betöltésekor:", error));
+
+    fetch(`${API_BASE}/cart`)
+      .then(response => response.json())
+      .then(data => setCartCount(data.length))
+      .catch(error => console.error("Hiba a kosár betöltésekor:", error));
   }, []);
 
-  const handleDelete = (id) => {
-    setMerchItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const handleAdd = (item) => {
-    const newItem = { id: Date.now(), ...item };
-    setMerchItems((prevItems) => [...prevItems, newItem]);
+  // **Termék hozzáadása a kosárhoz a backend segítségével**
+  const addToCart = async (item) => {
+    try {
+      await fetch(`${API_BASE}/cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: item.id, quantity: 1 })
+      });
+      setCartCount(cartCount + 1);
+    } catch (error) {
+      console.error("Hiba a kosárhoz adásnál:", error);
+    }
   };
 
   return (
     <div className="merch-container">
-      {/* Háttér videó hozzáadása */}
+      {/* Háttérvideó */}
       <div className="merch-video-container">
         <video className="merch-video-background" autoPlay loop muted playsInline>
           <source src="/merchhatter.mp4" type="video/mp4" />
@@ -95,12 +68,14 @@ function Merch() {
         </video>
       </div>
 
+      {/* Kosár ikon és számláló */}
+      <div className="cart-container" onClick={() => navigate("/cart")}>
+        <span className="cart-icon">🛒</span>
+        <span className="cart-count">{cartCount}</span>
+      </div>
+
       <Routes>
-        <Route
-          path="/"
-          element={<MerchList merchItems={merchItems} onDelete={handleDelete} />}
-        />
-        <Route path="/new" element={<MerchForm onSubmit={handleAdd} />} />
+        <Route path="/" element={<MerchList merchItems={merchItems} addToCart={addToCart} />} />
       </Routes>
     </div>
   );
