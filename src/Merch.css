@@ -1,24 +1,14 @@
-.merch-container {
-  position: relative;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow-y: auto;
-}
+/* ============================== */
+/*        HÁTTÉR VIDEÓ            */
+/* ============================== */
 
-/* Háttér videó stílusok */
 .merch-video-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;  /* A videó a tartalom mögött marad */
+  z-index: -1;
   overflow: hidden;
 }
 
@@ -28,24 +18,39 @@
   object-fit: cover;
 }
 
-/* Merch kártya rács elrendezése: 4 oszlop soronként */
+/* ============================== */
+/*         FŐOLDAL (Merch)        */
+/* ============================== */
+
+.merch-container {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  color: white;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* 4 oszlopos elrendezés */
 .merch-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
+  justify-content: center;
 }
 
+/* Termékkártyák */
 .card {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 220px;
-  margin: 0 auto;
+  width: 220px;
+  height: auto;
+  margin: auto;
   position: relative;
-  z-index: 1;
 }
 
 .card-img {
@@ -55,6 +60,17 @@
   height: auto;
   border-radius: 5px;
   object-fit: contain;
+}
+
+.price {
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.size-select {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
 }
 
 .order-btn {
@@ -68,5 +84,248 @@
 }
 
 .order-btn:hover {
+  background: #cc5200;
+}
+
+/* ============================== */
+/*       KOSÁR IKON (Jobb felső sarok)  */
+/* ============================== */
+
+.cart-container {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+
+/* Kosár ikon */
+.cart-icon {
+  font-size: 30px;
+  margin-right: 5px; /* Számláló közvetlenül mellette jobbra */
+  color: white;
+}
+
+/* Kosár termékszámláló */
+.cart-count {
+  background: red;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================== */
+/*         KOSÁR OLDAL            */
+/* ============================== */
+
+.cart-container-page {
+  text-align: center;
+  color: white;
+  padding: 50px;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Üres kosár üzenet */
+.empty-cart {
+  font-size: 20px;
+  font-weight: bold;
+  color: lightgray;
+}
+
+/* Kosár elemek (egymás alatt) */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Egyedi kártya a kosárban lévő termékekhez */
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+/* Kosár termék képe */
+.cart-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: contain;
+}
+
+/* Kosár termék információk */
+.cart-item-info {
+  flex-grow: 1;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.cart-item-info h3 {
+  margin: 0;
+}
+
+.cart-item-info p {
+  color: #ff6600;
+  font-weight: bold;
+}
+
+/* Törlés gomb */
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
+
+/* Rendelés leadása gomb */
+.checkout-btn {
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.checkout-btn:hover {
+  background: #cc5200;
+}
+/* Kosár oldal fő konténer */
+.cart-container-page {
+  text-align: center;
+  color: white;
+  padding: 50px;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* VISSZA gomb */
+.back-btn {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.back-btn:hover {
+  background: #222;
+}
+
+/* Üres kosár üzenet */
+.empty-cart {
+  font-size: 20px;
+  font-weight: bold;
+  color: lightgray;
+}
+
+/* Kosár elemek (egymás alatt) */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Egyedi kártya a kosárban lévő termékekhez */
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+/* Kosár termék képe */
+.cart-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: contain;
+}
+
+/* Kosár termék információk */
+.cart-item-info {
+  flex-grow: 1;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.cart-item-info h3 {
+  margin: 0;
+}
+
+.cart-item-info p {
+  color: #ff6600;
+  font-weight: bold;
+}
+
+/* Törlés gomb */
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
+
+/* Rendelés leadása gomb */
+.checkout-btn {
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.checkout-btn:hover {
   background: #cc5200;
 }

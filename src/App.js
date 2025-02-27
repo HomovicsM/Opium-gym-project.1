@@ -8,6 +8,7 @@ import Tour from './Tour';
 import Videos from './Videos';
 import Register from './Register';
 import Login from './Login';
+import About from './About';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
           <Route path="/videos" element={<Videos />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+
         </Routes>
       </div>
     </Router>
