@@ -9,6 +9,7 @@ import Videos from './Videos';
 import Register from './Register';
 import Login from './Login';
 import About from './About';
+import Cart from './Cart';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             }
           />
           <Route path="/merch" element={<Merch />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/tour" element={<Tour />} />
           <Route path="/videos" element={<Videos />} />
           <Route path="/register" element={<Register />} />
