@@ -37,7 +37,7 @@ function Tour() {
     <div className="tour-container">
       <div className="tour-video-container">
         <video className="tour-video-background" autoPlay loop muted playsInline>
-          <source src="/merchhatter.mp4" type="video/mp4" />
+          <source src="/tour.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
