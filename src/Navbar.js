@@ -12,11 +12,11 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${menuOpen ? "active" : ""}`}>
       <div className="menu-button" aria-label="button" onClick={() => setMenuOpen(!menuOpen)}>
-        <div className={`bar ${menuOpen ? "rotate-45" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "hidden" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "-rotate-45" : ""}`}></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
       </div>
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
         <a href="#" onClick={() => handleNavigation("/")}>Főoldal</a>

@@ -27,6 +27,7 @@
   text-align: center;
   padding: 20px;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   min-height: 100vh;
   overflow-y: auto;
 }
@@ -47,6 +48,7 @@
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: "Copperplate Gothic", sans-serif;
   width: 220px;
   height: auto;
   margin: auto;
@@ -65,6 +67,7 @@
 .price {
   font-weight: bold;
   color: #ff6600;
+  font-family: "Copperplate Gothic", sans-serif;
 }
 
 .size-select {
@@ -131,6 +134,7 @@
 .cart-container-page {
   text-align: center;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   padding: 50px;
   position: relative;
   z-index: 2;
@@ -142,6 +146,7 @@
 .empty-cart {
   font-size: 20px;
   font-weight: bold;
+  font-family: "Copperplate Gothic", sans-serif;
   color: lightgray;
 }
 
@@ -194,6 +199,7 @@
 .remove-btn {
   background: red;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   border: none;
   padding: 8px 12px;
   cursor: pointer;
@@ -209,6 +215,7 @@
 .checkout-btn {
   background: #ff6600;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   border: none;
   padding: 12px 20px;
   cursor: pointer;
@@ -224,6 +231,7 @@
 .cart-container-page {
   text-align: center;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   padding: 50px;
   position: relative;
   z-index: 2;
@@ -235,6 +243,7 @@
 .back-btn {
   background: #444;
   color: white;
+  font-family: "Copperplate Gothic", sans-serif;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -250,6 +259,7 @@
 /* Üres kosár üzenet */
 .empty-cart {
   font-size: 20px;
+  font-family: "Copperplate Gothic", sans-serif;
   font-weight: bold;
   color: lightgray;
 }
@@ -297,6 +307,7 @@
 .cart-item-info p {
   color: #ff6600;
   font-weight: bold;
+  font-family: "Copperplate Gothic", sans-serif;
 }
 
 /* Törlés gomb */

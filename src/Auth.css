@@ -30,6 +30,7 @@
     padding: 30px; /* Nagyobb belső margó */
     border-radius: 10px;
     color: white;
+    font-family: "Copperplate Gothic", sans-serif;
     text-align: center;
     position: relative;
     z-index: 1;
