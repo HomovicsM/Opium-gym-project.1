@@ -1,47 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using gymproject1.Data;
 using gymproject1.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace gymproject1.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    [Route("api/products")]
+    public class ProductsController : ControllerBase
     {
-        private readonly MerchDbContext _context;
+        private readonly AppDbContext _context;
 
-        public ProductController(MerchDbContext context)
+        public ProductsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public IActionResult GetProducts(int page = 1, int pageSize = 10)
         {
-            return await _context.Products.ToListAsync();
+            var products = _context.Products
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return Ok(products);
         }
 
-        // POST: api/product
         [HttpPost]
-        public async Task<ActionResult<Product>> AddProduct(Product product)
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddProduct([FromBody] Product product)
         {
             _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+            _context.SaveChanges();
+            return Ok(product);
         }
 
-        // DELETE: api/product/{id}
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            var product = await _context.Products.FindAsync(id);
+            var existingProduct = _context.Products.Find(id);
+            if (existingProduct == null) return NotFound();
+
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Price = product.Price;
+            existingProduct.ImageUrl = product.ImageUrl;
+            _context.SaveChanges();
+
+            return Ok(existingProduct);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _context.Products.Find(id);
             if (product == null) return NotFound();
 
             _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return NoContent();
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

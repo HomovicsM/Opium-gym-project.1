@@ -1,118 +1,56 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using gymproject1.Models;
-using gymproject1.Repositories;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc;
+using gymproject1.Data;
+using gymproject1.Services;
+using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
+using gymproject1.Models;
 
 namespace gymproject1.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _configuration;
-        private readonly PasswordHasher<User> _passwordHasher;
+        private readonly AppDbContext _context;
+        private readonly AuthService _authService;
 
-        public AuthController(IUserRepository userRepository, IConfiguration configuration)
+        public AuthController(AppDbContext context, AuthService authService)
         {
-            _userRepository = userRepository;
-            _configuration = configuration;
-            _passwordHasher = new PasswordHasher<User>();
+            _context = context;
+            _authService = authService;
         }
 
-        // POST api/auth/register
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public IActionResult Register([FromBody] User user)
         {
-            if (string.IsNullOrWhiteSpace(request.Username) ||
-                string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.Password))
-            {
-                return BadRequest(new { message = "Minden mező kitöltése kötelező!" });
-            }
+            if (_context.Users.Any(u => u.Email == user.Email))
+                return BadRequest("Email already exists");
 
-            var existingUser = await _userRepository.GetByEmailAsync(request.Email);
-            if (existingUser != null)
-            {
-                return BadRequest(new { message = "Ezzel az email címmel már regisztráltak!" });
-            }
+            user.PasswordHash = HashPassword(user.PasswordHash);
+            _context.Users.Add(user);
+            _context.SaveChanges();
 
-            var user = new User
-            {
-                Username = request.Username,
-                Email = request.Email
-            };
-
-            // Jelszó hashelése
-            user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
-
-            await _userRepository.AddAsync(user);
-
-            return StatusCode(201, new { message = "Sikeres regisztráció!" });
+            return Ok(user);
         }
 
-        // POST api/auth/login
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public IActionResult Login([FromBody] User user)
         {
-            if (string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.Password))
-            {
-                return BadRequest(new { message = "Minden mező kitöltése kötelező!" });
-            }
+            var foundUser = _context.Users.SingleOrDefault(u => u.Email == user.Email);
+            if (foundUser == null || foundUser.PasswordHash != HashPassword(user.PasswordHash))
+                return Unauthorized("Invalid credentials");
 
-            var user = await _userRepository.GetByEmailAsync(request.Email);
-            if (user == null)
-            {
-                return BadRequest(new { message = "Érvénytelen email vagy jelszó!" });
-            }
-
-            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-            if (result == PasswordVerificationResult.Failed)
-            {
-                return BadRequest(new { message = "Érvénytelen email vagy jelszó!" });
-            }
-
-            var token = GenerateJwtToken(user);
-
-            return Ok(new { message = "Sikeres bejelentkezés!", token });
+            var token = _authService.GenerateToken(foundUser);
+            return Ok(new { Token = token });
         }
 
-        // GET api/auth/protected
-        [Authorize]
-        [HttpGet("protected")]
-        public IActionResult Protected()
+        private string HashPassword(string password)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return Ok(new { message = "Védett tartalom", userId });
-        }
-
-        private string GenerateJwtToken(User user)
-        {
-            var jwtSecret = _configuration["Jwt:Secret"] ?? "your_secret_key_here";
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSecret));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
+            using (SHA256 sha256 = SHA256.Create())
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(bytes);
+            }
         }
     }
 }

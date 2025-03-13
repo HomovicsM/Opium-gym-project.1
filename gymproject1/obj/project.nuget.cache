@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZyJ3a4q+12I=",
+  "dgSpecHash": "mNjV/kpBZwQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tanulo\\Source\\Repos\\Opium-gym-project.1\\gymproject1\\gymproject1.csproj",
+  "projectFilePath": "C:\\Users\\Tanulo\\Desktop\\geci\\gymproject1\\gymproject1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tanulo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Tanulo\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
