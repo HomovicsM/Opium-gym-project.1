@@ -1,76 +1,67 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Auth.css';
+import axios from 'axios';
+import './Auth.css'; // ugyanazt a CSS-t használjuk
 
 function Register() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("A jelszavak nem egyeznek meg!");
-      return;
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+        userName,
+        email,
+        password,
+      });
+
+      setMessage('Sikeres regisztráció!');
+      console.log(response.data);
+    } catch (error) {
+      console.error('Hiba:', error);
+      setMessage(error.response?.data || 'Sikertelen regisztráció');
     }
-    // Itt implementáld a regisztrációs logikát (pl. API hívás)
-    console.log("Regisztrációs adatok:", formData);
-    navigate('/login');
   };
 
   return (
     <div className="auth-page">
       <div className="auth-video-container">
-        <video className="auth-video-background" autoPlay loop muted playsInline>
+        <video className="auth-video-background" autoPlay muted loop>
           <source src="/reg.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+          A böngésződ nem támogatja a videó lejátszást.
         </video>
       </div>
+
       <div className="auth-container">
         <h2>Regisztráció</h2>
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form className="auth-form" onSubmit={handleRegister}>
           <input
             type="text"
-            name="username"
             placeholder="Felhasználónév"
-            value={formData.username}
-            onChange={handleChange}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
             required
           />
           <input
             type="email"
-            name="email"
             placeholder="Email cím"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
             type="password"
-            name="password"
             placeholder="Jelszó"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Jelszó megerősítése"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button type="submit">Regisztráció</button>
         </form>
+        {message && <p>{message}</p>}
       </div>
     </div>
   );
