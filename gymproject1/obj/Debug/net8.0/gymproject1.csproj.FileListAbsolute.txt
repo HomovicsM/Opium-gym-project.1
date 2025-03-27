@@ -1,8 +1,0 @@
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.csproj.AssemblyReference.cache
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.AssemblyInfoInputs.cache
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.AssemblyInfo.cs
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.csproj.CoreCompileInputs.cache
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Tanulo\Desktop\geci\gymproject1\obj\Debug\net8.0\gymproject1.sourcelink.json
