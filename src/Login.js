@@ -1,54 +1,57 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Auth.css';
+import axios from 'axios';
+import './Auth.css'; // 👉 Fontos: importáljuk a stílusokat
 
 function Login() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Itt implementáld a bejelentkezési logikát (pl. API hívás)
-    console.log("Bejelentkezési adatok:", formData);
-    navigate('/');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        userName,
+        password,
+      });
+
+      setMessage(response.data.message);
+    } catch (error) {
+      console.error('Hiba:', error);
+      setMessage(error.response?.data || 'Sikertelen bejelentkezés');
+    }
   };
 
   return (
     <div className="auth-page">
       <div className="auth-video-container">
-        <video className="auth-video-background" autoPlay loop muted playsInline>
+        <video className="auth-video-background" autoPlay muted loop>
           <source src="/reg.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+          A böngésződ nem támogatja a videó lejátszást.
         </video>
       </div>
+
       <div className="auth-container">
         <h2>Bejelentkezés</h2>
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form className="auth-form" onSubmit={handleLogin}>
           <input
-            type="email"
-            name="email"
-            placeholder="Email cím"
-            value={formData.email}
-            onChange={handleChange}
+            type="text"
+            placeholder="Felhasználónév"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
             required
           />
           <input
             type="password"
-            name="password"
             placeholder="Jelszó"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button type="submit">Bejelentkezés</button>
         </form>
+        {message && <p>{message}</p>}
       </div>
     </div>
   );
