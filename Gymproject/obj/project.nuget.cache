@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H8olwT9oEMg=",
+  "dgSpecHash": "UvtvpcOTlgE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tanulo\\gitworkdir\\Gymproject\\Gymproject\\Gymproject.csproj",
+  "projectFilePath": "C:\\Users\\Tanulo\\Desktop\\backend\\Opium-gym-project\\Gymproject\\Gymproject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tanulo\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\Tanulo\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
