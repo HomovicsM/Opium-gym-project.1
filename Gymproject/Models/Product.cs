@@ -13,5 +13,5 @@ public partial class Product
 
     public decimal Price { get; set; }
 
-    public string ImageUrl { get; set; } = null!;
+    public string Image_Url { get; set; } = null!;
 }
