@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import "./Merch.css";
-
-const API_BASE = "http://localhost:5000/api"; // Your backend URL
 
 function MerchList({ merchItems, addToCart }) {
   return (
@@ -34,11 +32,11 @@ function Merch() {
 
   // **Termékek betöltése a backendből with Axios**
   useEffect(() => {
-    axios.get(`${API_BASE}/product`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/Merch/product`)
       .then(response => setMerchItems(response.data))
       .catch(error => console.error("Hiba a termékek betöltésekor:", error));
 
-    axios.get(`${API_BASE}/cart`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/Merch/cart`)
       .then(response => setCartCount(response.data.length))
       .catch(error => console.error("Hiba a kosár betöltésekor:", error));
   }, []);
@@ -46,7 +44,7 @@ function Merch() {
   // **Termék hozzáadása a kosárhoz a backend segítségével with Axios**
   const addToCart = async (item) => {
     try {
-      await axios.post(`${API_BASE}/cart`, { productId: item.id, quantity: 1 });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/Merch/cart`, { productId: item.id, quantity: 1 });
       setCartCount(cartCount + 1);
     } catch (error) {
       console.error("Hiba a kosárhoz adásnál:", error);
