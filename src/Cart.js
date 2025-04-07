@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Merch.css";
 
-const API_BASE = "http://localhost:5000/api"; // Backend URL
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_BASE}/cart`)
+    fetch(`${process.env.REACT_APP_API_URL}/cart`)
       .then(response => response.json())
       .then(data => setCartItems(data))
       .catch(error => console.error("Hiba a kosár betöltésekor:", error));
@@ -18,7 +17,7 @@ function Cart() {
   // **Elem törlése a kosárból**
   const removeFromCart = async (id) => {
     try {
-      await fetch(`${API_BASE}/cart/${id}`, { method: "DELETE" });
+      await fetch(`${process.env.REACT_APP_API_URL}/cart/${id}`, { method: "DELETE" });
       setCartItems(cartItems.filter(item => item.id !== id));
     } catch (error) {
       console.error("Hiba a törlésnél:", error);

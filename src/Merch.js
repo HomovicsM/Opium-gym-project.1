@@ -67,9 +67,6 @@ function Merch() {
         <span className="cart-count">{cartCount}</span>
       </div>
 
-      <Routes>
-        <Route path="/" element={<MerchList merchItems={merchItems} addToCart={addToCart} />} />
-      </Routes>
     </div>
   );
 }
