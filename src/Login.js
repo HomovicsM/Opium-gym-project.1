@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Auth.css'; // 👉 Fontos: importáljuk a stílusokat
+import './Auth.css'; 
 
 function Login() {
   const [userName, setUserName] = useState('');

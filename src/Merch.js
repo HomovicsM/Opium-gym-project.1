@@ -30,7 +30,7 @@ function Merch() {
   const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
 
-  // **Termékek betöltése a backendből with Axios**
+  // **Termékek betöltése a backendből Axiosal**
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/Merch/product`)
       .then(response => setMerchItems(response.data))
@@ -41,7 +41,7 @@ function Merch() {
       .catch(error => console.error("Hiba a kosár betöltésekor:", error));
   }, []);
 
-  // **Termék hozzáadása a kosárhoz a backend segítségével with Axios**
+  // **Termék hozzáadása a kosárhoz a backend segítségével Axiosal**
   const addToCart = async (item) => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/Merch/cart`, { productId: item.id, quantity: 1 });

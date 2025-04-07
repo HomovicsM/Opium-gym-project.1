@@ -1,6 +1,6 @@
-/* ============================== */
+
 /*        HÁTTÉR VIDEÓ            */
-/* ============================== */
+
 
 .merch-video-container {
   position: fixed;
@@ -18,9 +18,7 @@
   object-fit: cover;
 }
 
-/* ============================== */
 /*         FŐOLDAL (Merch)        */
-/* ============================== */
 
 .merch-container {
   position: relative;
@@ -90,9 +88,7 @@
   background: #cc5200;
 }
 
-/* ============================== */
 /*       KOSÁR IKON (Jobb felső sarok)  */
-/* ============================== */
 
 .cart-container {
   position: fixed;
@@ -110,7 +106,7 @@
 /* Kosár ikon */
 .cart-icon {
   font-size: 30px;
-  margin-right: 5px; /* Számláló közvetlenül mellette jobbra */
+  margin-right: 5px;
   color: white;
 }
 
@@ -127,9 +123,7 @@
   justify-content: center;
 }
 
-/* ============================== */
 /*         KOSÁR OLDAL            */
-/* ============================== */
 
 .cart-container-page {
   text-align: center;

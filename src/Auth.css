@@ -22,19 +22,18 @@
     object-fit: cover;
   }
   
-  /* Az űrlapot tartalmazó doboz stílusa - megnövelt méret */
   .auth-container {
-    width: 500px; /* Növelt szélesség */
-    margin: 80px auto; /* Kicsit kisebb margó a nagyobb panel miatt */
+    width: 500px;
+    margin: 80px auto; 
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px; /* Nagyobb belső margó */
+    padding: 30px; 
     border-radius: 10px;
     color: white;
     font-family: "Copperplate Gothic", sans-serif;
     text-align: center;
     position: relative;
     z-index: 1;
-    font-size: 1.1rem; /* Kicsit nagyobb betűméret az űrlapban */
+    font-size: 1.1rem; 
   }
   
   .auth-form {
@@ -43,7 +42,7 @@
   }
   
   .auth-form input {
-    padding: 12px; /* Növelt input padding */
+    padding: 12px;
     margin: 10px 0;
     border: none;
     border-radius: 5px;

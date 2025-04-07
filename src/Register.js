@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Auth.css'; // ugyanazt a CSS-t használjuk
+import './Auth.css';
 
 function Register() {
   const [userName, setUserName] = useState('');
