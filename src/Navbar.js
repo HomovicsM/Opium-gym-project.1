@@ -26,6 +26,7 @@ function Navbar() {
         <a href="/about" onClick={() => handleNavigation("/about")}>Rólunk</a>
         <a href="/login" onClick={() => handleNavigation("/login")}>Bejelentkezés</a>
         <a href="/register" onClick={() => handleNavigation("/register")}>Regisztráció</a>
+        <a href="/admin" onClick={() => handleNavigation("/admin")}>Admin</a>
       </div>
     </nav>
   );
